@@ -9,6 +9,7 @@
 
 #include "Vector3.h"
 #include "Vector4.h"
+#include "Matrix4x4.h"
 
 class Device
 {
@@ -17,8 +18,12 @@ public:
 
 public:
 	void Clear();
-	void Rasterization(std::vector<Vector3> &mesh);
-	void TriangleTraversal(Vector3 &v1, Vector3 &v2, Vector3 &v3, std::vector<Vector3> &fragments);
+	void GeometryStage(Vector4 &vertex1, Vector4 &vertex2, Vector4 &vertex3);
+	bool Clipping(const Vector4 &vertex);
+	void ScreenMapping(Vector4 &vertex);
+	void RasterizerStage(Vector4 &vertex1, Vector4 &vertex2, Vector4 &vertex3);
+	std::vector<Vector3> TriangleSetup(const Vector4 &vertex1, const Vector4 &vertex2, const Vector4 &vertex3);
+	std::vector<Vector3> TriangleTraversal(const Vector3 &vertex1, const Vector3 &vertex2, const Vector3 &vertex3);
 	void PerFragmentOperations(const std::vector<Vector3> &fragments);
 
 public:
