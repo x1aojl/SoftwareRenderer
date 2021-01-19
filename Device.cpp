@@ -22,7 +22,7 @@ void Device::Clear()
 // 几何阶段
 void Device::GeometryStage(Vector4 &vertex1, Vector4 &vertex2, Vector4 &vertex3)
 {
-	std::vector<Vector4> vertices = std::vector<Vector4> { vertex1, vertex2, vertex3 };
+	Vector4 vertices[3] { vertex1, vertex2, vertex3 };
 	for (auto &vertex : vertices)
 	{
 		// 模型视图变换
@@ -31,16 +31,16 @@ void Device::GeometryStage(Vector4 &vertex1, Vector4 &vertex2, Vector4 &vertex3)
 
 		Vector3 meshPosition;
 		Matrix4x4 translation = Matrix4x4::Translation(meshPosition);
-
 		Matrix4x4 world = rotation * translation;
 
 		Vector3 CameraPosition = Vector3(0, 0, 10);
 		Vector3 CameraForward = Vector3(0, 0, -10);
-		Vector3 CameraUp = Vector3(0, 1, 0);
+		Vector3 CameraUp = Vector3(1, 1, 1);
 		Matrix4x4 view = Matrix4x4::LookAtLH(CameraPosition, CameraForward, CameraUp);
+
 		Matrix4x4 projection = Matrix4x4::PerspectiveFovLH(0.78f, (float)width / height, 0.01f, 1.0f);
 
-		Matrix4x4 mvp = world * view * projection;
+		vertex = (world * view * projection).Transform(vertex);
 
 		if (Clipping(vertex))
 			return;
@@ -98,7 +98,7 @@ std::vector<Vector3> Device::TriangleSetup(const Vector4 &vertex1, const Vector4
 //    v1
 // 将v1、v2、v3三个点按纵坐标y升序排列
 // 分别扫描v1-v2-vm和v2-vm-v3两个三角形
-std::vector<Vector3> Device::TriangleTraversal(const Vector3 &vertex1, const Vector3 &vertex2, const Vector3 &vertex3)
+std::vector<Vector3> Device::TriangleTraversal(Vector3 &vertex1, Vector3 &vertex2, Vector3 &vertex3)
 {
 	std::vector<Vector3> fragments;
 
