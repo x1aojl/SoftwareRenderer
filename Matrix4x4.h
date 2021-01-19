@@ -7,11 +7,15 @@
 #include <cmath>
 
 #include "Vector3.h"
+#include "Vector4.h"
 
 class Matrix4x4
 {
 public:
 	Matrix4x4& operator *(const Matrix4x4 &rhs);
+
+public:
+	Vector4 Transform(const Vector4 &rhs);
 
 public:
 	static Matrix4x4 LookAtLH(Vector3 eye, Vector3 forward, Vector3 up);
