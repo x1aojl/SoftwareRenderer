@@ -23,7 +23,7 @@ public:
 	void ScreenMapping(Vector4 &vertex);
 	void RasterizerStage(Vector4 &vertex1, Vector4 &vertex2, Vector4 &vertex3);
 	std::vector<Vector3> TriangleSetup(const Vector4 &vertex1, const Vector4 &vertex2, const Vector4 &vertex3);
-	std::vector<Vector3> TriangleTraversal(const Vector3 &vertex1, const Vector3 &vertex2, const Vector3 &vertex3);
+	std::vector<Vector3> TriangleTraversal(Vector3 &vertex1, Vector3 &vertex2, Vector3 &vertex3);
 	void PerFragmentOperations(const std::vector<Vector3> &fragments);
 
 public:
