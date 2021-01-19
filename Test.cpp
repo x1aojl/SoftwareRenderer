@@ -22,7 +22,7 @@ int main()
 	dev.Clear();
 	dev.GeometryStage(mesh[0], mesh[1], mesh[2]);
 	dev.RasterizerStage(mesh[0], mesh[1], mesh[2]);
-	Bitmap().SavaBmp(dev.frameBuffer, WIDTH, HEIGHT, "Screenshot1.bmp");
+	Bitmap().SavaBmp(dev.frameBuffer, WIDTH, HEIGHT, "Screenshot.bmp");
 
 	return 0;
 }
