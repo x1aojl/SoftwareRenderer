@@ -22,6 +22,15 @@ Matrix4x4& Matrix4x4::operator *(const Matrix4x4 &rhs)
     return m;
 }
 
+Vector4 Matrix4x4::Transform(const Vector4 &rhs)
+{
+    float x = rhs.x * Values[0][0] + rhs.y * Values[1][0] + rhs.z * Values[2][0] + Values[3][0];
+    float y = rhs.x * Values[0][1] + rhs.y * Values[1][1] + rhs.z * Values[2][1] + Values[3][1];
+    float z = rhs.x * Values[0][2] + rhs.y * Values[1][2] + rhs.z * Values[2][2] + Values[3][2];
+    float w = rhs.x * Values[0][3] + rhs.y * Values[1][3] + rhs.z * Values[2][3] + Values[3][3];
+    return Vector4(x, y, z, w);
+}
+
 // https://msdn.microsoft.com/en-us/library/bb205342(v=vs.85).aspx
 Matrix4x4 Matrix4x4::LookAtLH(Vector3 eye, Vector3 forward, Vector3 up)
 {
