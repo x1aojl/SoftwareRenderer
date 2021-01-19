@@ -9,19 +9,20 @@
 #define HEIGHT 100
 
 // 网格数据
-std::vector<Vector3> mesh
+std::vector<Vector4> mesh
 {
-	Vector3(0, 0,  1),
-	Vector3(WIDTH, 0,  1),
-	Vector3(WIDTH / 2,  HEIGHT,  1),
+	Vector4(0,   0,	  1, 1),
+	Vector4(100, 0,	  1, 1),
+	Vector4(50,  100, 1, 1),
 };
 
 int main()
 {
 	Device dev(WIDTH, HEIGHT);
 	dev.Clear();
-	dev.Rasterization(mesh);
-	Bitmap().SavaBmp(dev.frameBuffer, WIDTH, HEIGHT, "Screenshot.bmp");
+	dev.GeometryStage(mesh[0], mesh[1], mesh[2]);
+	dev.RasterizerStage(mesh[0], mesh[1], mesh[2]);
+	Bitmap().SavaBmp(dev.frameBuffer, WIDTH, HEIGHT, "Screenshot1.bmp");
 
 	return 0;
 }
